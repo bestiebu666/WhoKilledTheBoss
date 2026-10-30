@@ -1,0 +1,69 @@
+{
+  "models_dir": "assets/models",
+  "probe_dir": "docs/probe_prep2",
+  "items": [
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/假人模特1.glb",
+      "name": "SM_F_Mannequin_01",
+      "fit": "height",
+      "target": 1.35,
+      "tris": 2500,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/假人模特2.glb",
+      "name": "SM_F_Mannequin_02",
+      "fit": "height",
+      "target": 1.35,
+      "tris": 2500,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/假人模特3.glb",
+      "name": "SM_F_Mannequin_03",
+      "fit": "height",
+      "target": 1.35,
+      "tris": 2500,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/老板.glb",
+      "name": "SM_A_Npc_Boss",
+      "fit": "height",
+      "target": 1.04,
+      "tris": 4000,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/外聘设计总监.glb",
+      "name": "SM_A_Npc_Director",
+      "fit": "height",
+      "target": 1.04,
+      "tris": 4000,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/凤凰男_红润版.glb",
+      "name": "SM_A_Npc_Feng",
+      "fit": "height",
+      "target": 1.04,
+      "tris": 4000,
+      "tex": 512,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/实习生1号.glb",
+      "name": "SM_A_Npc_Intern1",
+      "fit": "height",
+      "target": 1.04,
+      "tris": 4000,
+      "tex": 512,
+      "probe_only": true
+    }
+  ]
+}

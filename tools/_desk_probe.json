@@ -1,0 +1,25 @@
+{
+  "_note": "临时探针：只看新「办公桌.glb」的四视图与朝向，probe_only 不写 assets。yaw 0 = 原始朝向（第 1 格 = glTF +Z 侧）。",
+  "models_dir": "shots/_logowork/desk_new",
+  "probe_dir": "shots/_logowork/desk_new",
+  "items": [
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/办公桌.glb",
+      "name": "Desk_new_yaw0",
+      "fit": "width",
+      "target": 1.0,
+      "tex": 512,
+      "yaw": 0,
+      "probe_only": true
+    },
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/办公桌.glb",
+      "name": "Desk_new_yaw180",
+      "fit": "width",
+      "target": 1.0,
+      "tex": 512,
+      "yaw": 180,
+      "probe_only": true
+    }
+  ]
+}

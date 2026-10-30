@@ -1,0 +1,15 @@
+{
+  "_note": "2026-10-05 交付的 11 个资产 → 归一化成 assets/models/ 里的游戏模型。改尺寸改这里，重跑 tools/model_prep.py 即可。",
+  "models_dir": "assets/models",
+  "probe_dir": "docs/probe_prep",
+  "items": [
+    {
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/沙发.glb",
+      "name": "SM_F_Sofa",
+      "fit": "width",
+      "target": 3.9,
+      "tris": 24000,
+      "tex": 2048
+    }
+  ]
+}

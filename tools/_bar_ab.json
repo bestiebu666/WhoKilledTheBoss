@@ -1,0 +1,28 @@
+{
+  "_note": "临时对比清单：吧台变矮的两个候选。只输出到 shots/_logowork/bar_ab（那边有 .gdignore，不会进 assets/models）。作者选定后再改正式清单 tools/model_prep_list.json。",
+  "models_dir": "shots/_logowork/bar_ab",
+  "probe_dir": "shots/_logowork/bar_ab",
+  "items": [
+    {
+      "_note": "A 版：保住长度 4.8 米（= 地毯直径，作者指定过），只把高度压到沙发那么高。stretch 单个数字 = 只乘高。1.266 / 2.260 = 0.560177。⚠ 代价：台面上的水壶/马克杯/咖啡机/绿植会跟着竖直压扁（它们和柜体是同一个网格）。",
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/吧台.glb",
+      "name": "Bar_lowA_keep4m8",
+      "fit": "width",
+      "target": 4.8,
+      "stretch": 0.560177,
+      "yaw": 180,
+      "tex": 2048,
+      "weld": false
+    },
+    {
+      "_note": "B 版：整体等比缩小到高 1.266 米。比例完全不失真（道具形状正常），但长度从 4.8 缩到 2.689 米。",
+      "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/吧台.glb",
+      "name": "Bar_lowB_scale",
+      "fit": "height",
+      "target": 1.266,
+      "yaw": 180,
+      "tex": 2048,
+      "weld": false
+    }
+  ]
+}

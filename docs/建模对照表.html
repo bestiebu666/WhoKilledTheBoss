@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>建模对照表 · 办公室八卦 Demo</title>
+<style>
+:root {
+  --ink: #2b2a27;
+  --ink-soft: #6b6862;
+  --line: #d9d3c8;
+  --paper: #fbf9f5;
+  --card: #ffffff;
+  --accent: #b5643c;
+  --p1: #b5643c;
+  --p2: #7d8f6d;
+  --p3: #9a958d;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 40px 32px 72px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.wrap { max-width: 1180px; margin: 0 auto; }
+.kicker { margin: 0 0 6px; font-size: 12px; letter-spacing: 0.18em; color: var(--accent); }
+h1 { margin: 0 0 10px; font-size: 27px; letter-spacing: 0.02em; }
+.sub { margin: 0 0 6px; color: var(--ink-soft); }
+.meta { margin: 0 0 30px; font-size: 12px; color: var(--ink-soft); }
+h2 {
+  margin: 40px 0 14px; font-size: 17px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--ink);
+}
+h2 .en { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-soft); margin-left: 10px; font-weight: 400; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li {
+  counter-increment: s; position: relative;
+  padding: 12px 16px 12px 52px; margin-bottom: 8px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+}
+.steps li::before {
+  content: counter(s); position: absolute; left: 16px; top: 12px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 13px; text-align: center; line-height: 24px;
+}
+.steps b { font-weight: 700; }
+code {
+  padding: 1px 6px; border-radius: 4px;
+  background: #f0ebe2; border: 1px solid var(--line);
+  font-family: Consolas, "Cascadia Mono", monospace; font-size: 12.5px;
+}
+.spec { margin: 0; padding: 0; list-style: none; }
+.spec li { padding: 7px 0 7px 0; border-bottom: 1px dashed var(--line); }
+.spec li:last-child { border-bottom: 0; }
+.spec em { font-style: normal; color: var(--accent); font-weight: 700; margin-right: 8px; }
+.zones { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; padding: 0; list-style: none; }
+.zones li {
+  flex: 1 1 150px; padding: 12px 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+}
+.zones .z { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.06em; }
+.zones .n { font-size: 22px; font-weight: 700; }
+.zones .t { font-size: 11.5px; color: var(--ink-soft); }
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); }
+caption { caption-side: top; text-align: left; font-size: 12px; color: var(--ink-soft); padding: 0 0 8px; }
+th, td { padding: 8px 10px; border: 1px solid var(--line); vertical-align: top; text-align: left; }
+thead th { background: #f2ece2; font-size: 12px; letter-spacing: 0.04em; white-space: nowrap; }
+tbody tr:nth-child(even) { background: #fdfbf8; }
+tr.zone-row td { background: #efe8dc; font-weight: 700; letter-spacing: 0.06em; }
+td.slot { font-family: Consolas, "Cascadia Mono", monospace; font-size: 12.5px; white-space: nowrap; }
+td.num, td.center { text-align: center; white-space: nowrap; }
+.two { font-size: 12px; color: var(--ink-soft); }
+.badge {
+  display: inline-block; padding: 1px 7px; border-radius: 999px;
+  font-size: 11.5px; color: #fff; white-space: nowrap;
+}
+.badge.p1 { background: var(--p1); }
+.badge.p2 { background: var(--p2); }
+.badge.p3 { background: var(--p3); }
+.grey { color: var(--ink-soft); }
+.hit { color: var(--accent); font-weight: 700; }
+.reuse { display: inline-block; padding: 0 7px; margin-left: 4px; border-radius: 999px; background: #eaf1e4; color: #5c7350; font-size: 11px; white-space: nowrap; }
+.mdl { font-family: Consolas, "Cascadia Mono", monospace; font-size: 12.5px; white-space: nowrap; }
+.tripo { margin-top: 4px; font-family: Consolas, monospace; font-size: 11.5px; color: #8a857c; }
+footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-soft); }
+@media print {
+  body { background: #fff; padding: 0; font-size: 11px; }
+  h2 { page-break-after: avoid; }
+  tr { page-break-inside: avoid; }
+  thead { display: table-header-group; }
+}
+</style>
+</head>
+<body><div class="wrap">
+<header>
+<p class="kicker">办公室八卦 Demo · 第一幕</p>
+<h1>灰盒槽位 · 建模对照表</h1>
+<p class="sub">49 个摆放位置，但<b>只需要做 36 个模型</b>（已完成 24）。一个模型可以顶多个位置：6 张工位桌、12 把椅子、5 扇窗各只需一份。模型文件名 = <code>model</code> 名，丢进 <code>assets/models/</code> 就自动替换，不用改一行代码。<br>表里的尺寸<b>已经含了统一缩放</b>（<code>prop_scale</code> 0.8）—— 照表做即可，不要再自己缩。</p>
+<p class="meta">生成时间 2026-10-06 02:42 ｜ 源文件 <code>data/model_map.json</code> ｜ 重跑 <code>tools/gen_model_table.py</code> 即可刷新</p>
+</header>
+<h2>替换三步<span class="en">HOW TO SWAP</span></h2>
+<ol class="steps">
+<li><b>照着做。</b>把 <code>assets/placeholders/greybox_reference.glb</code> 拖进 Blender，每个方块的名字就是槽位名，位置和尺寸都是真值 —— 照着描，或者干脆当比例参照。</li>
+<li><b>照名字导出。</b>原点放<b>底面中心</b>、Y-up、Apply Transform（location 也要 Apply），导出 glb，<b>文件名必须等于「导出文件名」那一列</b>，例如 <code>SM_F_Desk.glb</code>。一个模型顶多个位置的时候（表里标了「×N 处复用」），只导这一份就行。</li>
+<li><b>丢进去就行。</b>放进 <code>assets/models/</code>，重开游戏自动替换。控制台会播报「已换真模型 N · 仍是灰盒 M」，尺寸或面数不对还会点名提醒。</li>
+</ol>
+<h2>命名规则与建模规范<span class="en">CONVENTIONS</span></h2>
+<ul class="spec">
+<li><em>命名</em><code>SM_&lt;Zone&gt;_&lt;Name&gt;[_&lt;Variant&gt;]</code>　Zone：B 建筑 / F 家具 / J 可交互 / A 角色 / FX 特效</li>
+<li><em>单位</em>米。尺寸照表里给的来（已含统一缩放），不要自己再缩。</li>
+<li><em>原点</em>放在物体<b>底面中心</b>（底面贴在表里的 y 上），没有例外 —— 主角是相机本身，不做模型。</li>
+<li><em>朝向</em>面向 -Z（glTF 默认正面）。椅子、人、有正反面的东西都照这个来。表里写了「绕 Y 轴转 X°」的位置是<b>场景替它转的</b>，你照 0° 做即可，别自己做反。两组工位背靠背拼成一个岛，就是靠这个字段把其中一组翻 180°。</li>
+<li><em>材质</em>Metallic 0、Roughness 0.85、只用 Base Color。不做法线贴图、不做 ORM、不做真实反射。</li>
+<li><em>配色</em>六组基色：暖木 <code>#C8A57B</code> 米白 <code>#EDE7DC</code> 雾蓝 <code>#8FA9C4</code> 鼠尾草绿 <code>#9BB39A</code> 珊瑚红 <code>#D98C6A</code> 墨灰 <code>#4B4A47</code>。</li>
+<li><em>复用</em>表里标了「×N 处复用」的，就是多个位置共用同一个模型文件。只做一个、只导出一份，不要加 _01 / _02 后缀。</li>
+<li><em>面数</em>表里给了每个模型的预算。人森风不怕少，超了就砍 —— 游戏会自动提醒。</li>
+</ul>
+<h2>分组汇总<span class="en">BY GROUP</span></h2>
+<ul class="zones">
+<li><p class="z">B · 建筑外壳</p><p class="n">8</p><p class="t">位置 17 个 ｜ 要做 8 个模型 ｜ 面数预算 1,550,400 ｜ 已有 2</p></li>
+<li><p class="z">F · 家具布景</p><p class="n">17</p><p class="t">位置 21 个 ｜ 要做 17 个模型 ｜ 面数预算 14,182,777 ｜ 已有 16</p></li>
+<li><p class="z">J · 可交互道具</p><p class="n">6</p><p class="t">位置 6 个 ｜ 要做 6 个模型 ｜ 面数预算 1,060,948 ｜ 已有 2</p></li>
+<li><p class="z">A · 角色</p><p class="n">4</p><p class="t">位置 4 个 ｜ 要做 4 个模型 ｜ 面数预算 979,485 ｜ 已有 4</p></li>
+<li><p class="z">FX · 特效辅助</p><p class="n">1</p><p class="t">位置 1 个 ｜ 要做 1 个模型 ｜ 面数预算 40 ｜ 已有 0</p></li>
+</ul>
+<p class="meta">合计 49 个摆放位置，要做 36 个模型，面数预算 17,773,650（去重后）。</p>
+<h2>槽位总表<span class="en">ALL SLOTS</span></h2>
+<table>
+<caption>位置 = 底面中心的 X / 抬升 Y / Z；尺寸 = 长 × 高 × 宽（米）。模型一律照「正面朝 -Z」做 —— 表里写了「绕 Y 轴转 X°」的位置，是场景替它转的，你不要自己做反。同一行模型复用多次的，只在第一次出现的地方给面数预算。灰盒的碰撞会一直保留，所以模型稍微大一点点也不影响走路和点击。</caption>
+<thead><tr>
+<th>编号</th>
+<th>摆在哪儿（场景节点）</th>
+<th>导出文件名（= 模型名）</th>
+<th>中文名</th>
+<th>位置 / 尺寸</th>
+<th>面数预算</th>
+<th>优先级</th>
+<th>状态</th>
+<th>做法与备注</th>
+</tr></thead><tbody>
+<tr class="zone-row"><td colspan="9">B · 建筑外壳（17 个位置 / 8 个模型）</td></tr>
+<tr id="SM_B_Floor"><td class="num">B-01</td><td class="slot">SM_B_Floor</td><td class="mdl">SM_B_Floor</td><td>地面<br><span class="two">外壳</span></td><td class="two">(0.00, -0.05, 0.00)<br>16×0.1×12 m</td><td class="num">40</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">玩家点击走动的面，必须留在 y=0 附近，别抬高。整块 16×12 米，一半的三角网都浪费在看不见的地方 —— 建议分成 4×4 米的小块拼，或者干脆用灰盒。</td></tr>
+<tr id="SM_B_Ceiling"><td class="num">B-02</td><td class="slot">SM_B_Ceiling</td><td class="mdl">SM_B_Ceiling</td><td>天花板<br><span class="two">外壳</span></td><td class="two">(0.00, 4.50, 0.00)<br>17.2×0.2×13.2 m</td><td class="num">40</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">一大块平顶，盖在 4.5 米高（比墙再多出一点，避免和墙之间露缝）。相机能抬头，所以这块会被看得很清楚 —— 但**灰盒白板完全够用**，要做就加一圈简单的跌级或几道梁。</td></tr>
+<tr id="SM_B_Wall_N"><td class="num">B-03</td><td class="slot">SM_B_Wall_N</td><td class="mdl">SM_B_Wall_Long<span class="reuse">×2 处复用</span></td><td>北墙（工位背靠，带窗）<br><span class="two">外壳</span></td><td class="two">(0.00, 0.00, -6.10)<br>16.6×4.5×0.2 m</td><td class="num">60</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Wall_Long。16.6 米长。可加踢脚线，别做厚。</td></tr>
+<tr id="SM_B_Wall_S"><td class="num">B-04</td><td class="slot">SM_B_Wall_S</td><td class="mdl">SM_B_Wall_Long<span class="reuse">×2 处复用</span></td><td>南墙<br><span class="two">外壳</span></td><td class="two">(0.00, 0.00, 6.10)<br>16.6×4.5×0.2 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Wall_Long。</td></tr>
+<tr id="SM_B_Wall_W"><td class="num">B-05</td><td class="slot">SM_B_Wall_W</td><td class="mdl">SM_B_Wall_Short<span class="reuse">×2 处复用</span></td><td>西墙（带门）<br><span class="two">外壳</span></td><td class="two">(-8.10, 0.00, 0.00)<br>0.2×4.5×12 m</td><td class="num">60</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Wall_Short。12 米长。</td></tr>
+<tr id="SM_B_Wall_E"><td class="num">B-06</td><td class="slot">SM_B_Wall_E</td><td class="mdl">SM_B_Wall_Short<span class="reuse">×2 处复用</span></td><td>东墙（带窗）<br><span class="two">外壳</span></td><td class="two">(8.10, 0.00, 0.00)<br>0.2×4.5×12 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Wall_Short。</td></tr>
+<tr id="SM_B_Window_Wall_A"><td class="num">B-07</td><td class="slot">SM_B_Window_Wall_A</td><td class="mdl">SM_B_Window_Wall<span class="reuse">×2 处复用</span></td><td>北墙落地窗·西扇<br><span class="two">窗</span></td><td class="two">(-3.89, 0.00, -5.76)<br>7.78×4.5×0.48 m</td><td class="num">1,500,000</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">2026-10-06 作者给的资产，顶掉北墙原来那排小窗（原 B-08/B-09 一并删）。**7.781 宽 × 4.5 高 × 0.48 深**（150 万面 / 单扇），高就是墙高 = 作者那句「高度遍布一整面墙」。凸出的边框那一面 = 玻璃可见面 = glTF +Z = 作者说的「室内面」，而北墙的室内方向同样是 +Z，**yaw 0 不用转**。注意它归 `prop:` 管而不是 `window:` —— windows 数组只生成浅蓝板，读不了 rot、也不做模型归一化。**玻璃开着自发光**（room.json 里那两条 prop 的 `glow` 字段，`main.gd` 的 `_set_emissive` 把模型自己的贴图当 emission 贴图）。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_B_Window_Wall_B"><td class="num">B-07b</td><td class="slot">SM_B_Window_Wall_B</td><td class="mdl">SM_B_Window_Wall<span class="reuse">×2 处复用</span></td><td>北墙落地窗·东扇<br><span class="two">窗</span></td><td class="two">(3.89, 0.00, -5.76)<br>7.78×4.5×0.48 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**复用 SM_B_Window_Wall**。作者 2026-10-06 又问「你可以素材复用拼接这个落地窗把整面墙铺满吗」—— 北墙 16 米、单扇 7.78 米，铺满就是 **2 扇并排**（15.56 米，两侧各余 0.22 米正好藏在墙角，中缝落在 x = 0）。所以同一个 glb 在场景里被实例了两次：**位置 51 个 / 模型仍是 33 个** —— 这就是「素材复用」在对照表上的样子。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_B_Window_E1"><td class="num">B-10</td><td class="slot">SM_B_Window_E1</td><td class="mdl">SM_B_Window_EW<span class="reuse">×2 处复用</span></td><td>东墙窗 1<br><span class="two">窗</span></td><td class="two">(7.96, 1.60, -3.00)<br>0.08×1.2×2.6 m</td><td class="num">120</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Window_EW。和 NS 那款同造型、转 90°（窗板朝向 ±X）。<div class="tripo">Tripo: low poly window frame, white rounded frame, plain bright pane, toy style, chibi diorama asset</div></td></tr>
+<tr id="SM_B_Window_E2"><td class="num">B-11</td><td class="slot">SM_B_Window_E2</td><td class="mdl">SM_B_Window_EW<span class="reuse">×2 处复用</span></td><td>东墙窗 2<br><span class="two">窗</span></td><td class="two">(7.96, 1.60, 1.40)<br>0.08×1.2×2.6 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_Window_EW。<div class="tripo">Tripo: same as SM_B_Window_EW</div></td></tr>
+<tr id="SM_B_Door_Main"><td class="num">B-12</td><td class="slot">SM_B_Door_Main</td><td class="mdl">SM_B_Door_Main</td><td>设计部的玻璃门（四扇一组）<br><span class="two">外壳</span></td><td class="two">(-7.88, 0.00, -1.90)<br>5.43×3.3×0.24 m<br><span class="hit">绕 Y 轴转 90°</span></td><td class="num">50,000</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">2026-10-06 换的真模型。**它不是单扇门，是四扇一组的落地玻璃门**（两侧窄固定扇 + 中间两扇带竖长把手），归一化出来是 **5.427 × 3.30 × 0.241 米**（宽×高×深）。作者只说了「高度约 2.5 米」，宽度是四扇通铺带出来的；后来又两次单轴调整 —— 「拉高 80cm」→ 高 3.30，「不要只拉长、还应该拉宽一点，拉宽 80cm 左右」→ 宽 5.427（清单里 `stretch: [1.1729, 1.0, 1.32]`，⛔ 不是等比）。有把手的一面在 glTF +Z = 室内面，上西墙时靠 room.json 里 `rot: 90` 把 +Z 转到 +X（朝屋内）。门仍旧是**不跟 prop_scale 缩**的尺度参照（`scale: 1.0`）。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_B_Lamp_01"><td class="num">B-13</td><td class="slot">SM_B_Lamp_01</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 1<br><span class="two">灯</span></td><td class="two">(-4.50, 4.40, -3.50)<br>1.15×0.1×1.15 m</td><td class="num">80</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。一个 1.15×1.15 的圆角方灯罩，吊在 4.4 米高（墙顶 4.5 米下方）。光的本体是代码加的，你只做罩子。视角抬到最高时会看到它 —— 不做也不影响可玩性，灰盒方块即可。<div class="tripo">Tripo: low poly ceiling light panel, rounded square, soft warm white, toy style</div></td></tr>
+<tr id="SM_B_Lamp_02"><td class="num">B-14</td><td class="slot">SM_B_Lamp_02</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 2<br><span class="two">灯</span></td><td class="two">(0.50, 4.40, -3.50)<br>1.15×0.1×1.15 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。<div class="tripo">Tripo: same as SM_B_LampPanel</div></td></tr>
+<tr id="SM_B_Lamp_03"><td class="num">B-15</td><td class="slot">SM_B_Lamp_03</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 3<br><span class="two">灯</span></td><td class="two">(5.00, 4.40, -3.50)<br>1.15×0.1×1.15 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。<div class="tripo">Tripo: same as SM_B_LampPanel</div></td></tr>
+<tr id="SM_B_Lamp_04"><td class="num">B-16</td><td class="slot">SM_B_Lamp_04</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 4<br><span class="two">灯</span></td><td class="two">(-4.50, 4.40, 3.20)<br>1.15×0.1×1.15 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。<div class="tripo">Tripo: same as SM_B_LampPanel</div></td></tr>
+<tr id="SM_B_Lamp_05"><td class="num">B-17</td><td class="slot">SM_B_Lamp_05</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 5<br><span class="two">灯</span></td><td class="two">(0.50, 4.40, 3.20)<br>1.15×0.1×1.15 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。<div class="tripo">Tripo: same as SM_B_LampPanel</div></td></tr>
+<tr id="SM_B_Lamp_06"><td class="num">B-18</td><td class="slot">SM_B_Lamp_06</td><td class="mdl">SM_B_LampPanel<span class="reuse">×6 处复用</span></td><td>吊灯 6<br><span class="two">灯</span></td><td class="two">(5.00, 4.40, 3.20)<br>1.15×0.1×1.15 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">复用 SM_B_LampPanel。<div class="tripo">Tripo: same as SM_B_LampPanel</div></td></tr>
+<tr class="zone-row"><td colspan="9">F · 家具布景（21 个位置 / 17 个模型）</td></tr>
+<tr id="SM_F_DeskBench_01"><td class="num">F-01</td><td class="slot">SM_F_DeskBench_01</td><td class="mdl">SM_F_Desk3P<span class="reuse">×2 处复用</span></td><td>三人办公桌 1（岛北排，3 个工位，人朝北）<br><span class="two">设计部工位</span></td><td class="two">(-4.00, 0.00, -4.15)<br>3.86×0.97×0.67 m</td><td class="num">1,499,060</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**2026-10-05 又换一次**：`assets/models/SM_F_Desk3P.glb` 现在是作者最新给的「办公桌」（**1,499,060 面** —— **不砍面**，tri 写实测值），替换掉上一版 50 万面的三人桌。三个工位连成一排，含**蓝灰隔板、粉色三抽屉柜、显示器、桌上绿植和文具**；**依然没有椅子**。**颜色照模型自带**（上一版作者要白色才做了 `tint #FFFFFF`，这一版不 tint 了）。**尺寸和位置逐位未变：3.862 × 0.970 × 0.665 米**（宽×高×深），`room.json` 的 `size` / `pos` / `rot` 一个数都没动。⭐ 做法：这版模型自然比例更深（宽:深:高 = 1 : 0.2199 : 0.2668，比上一版深 27.7%），`fit width 3.862` 后是 3.862×1.030×0.849；照单全收会让两个背靠背的桌子互插 0.184 米、非得挪 `DeskBench_2` 不可 —— 所以清单里加了 `stretch [1.0, 0.7829427, 0.9414504]` 把深和高压回旧值（**非均匀压缩**，抽屉柜会显得浅一点）。原点在底面中心、朝向 -Z（模型原本的坐人面朝 glTF +Z，归一化时 `yaw 180` 转过来）。**两排工位只做一份**，F-02 自动复用。这一组不转（rot 0）：人朝北、隔板朝南。</td></tr>
+<tr id="SM_F_DeskBench_02"><td class="num">F-02</td><td class="slot">SM_F_DeskBench_02</td><td class="mdl">SM_F_Desk3P<span class="reuse">×2 处复用</span></td><td>三人办公桌 2（岛南排，3 个工位，人朝南）<br><span class="two">设计部工位</span></td><td class="two">(-4.00, 0.00, -3.48)<br>3.86×0.97×0.67 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">复用 SM_F_Desk3P，不用单独建模。**这一组在场景里绕 Y 轴转了 180°**（room.json 的 rot 字段）—— 转完人朝南、隔板朝北，和 F-01 隔板对隔板贴成一个背靠背的工位岛。⚠ 因为新桌子进深只剩 0.665 米，**这一组的 z 也从 -3.083 跟着挪到 -3.935**，才贴得住第一排。所以导出模型本身不用做任何反的，照 0° 做即可。**2026-10-05 换成作者最新版办公桌后，模型尺寸仍是 3.862×0.970×0.665，所以这一组的 `z = -3.935` 也没动。**<div class="tripo">Tripo: same as SM_F_Desk3P</div></td></tr>
+<tr id="SM_F_WaterCooler"><td class="num">F-11</td><td class="slot">SM_F_WaterCooler</td><td class="mdl">SM_F_WaterCooler</td><td>饮水机<br><span class="two">茶水区</span></td><td class="two">(4.45, 0.00, 5.65)<br>0.53×1.6×0.5 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num">50,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_WaterCooler.glb。**2026-10-06 尺寸改为 0.525×1.600×0.502 米**（原来是 0.37×1.10×0.35，作者「调高 50cm」→ 归一化 target 1.10→1.60；等比，所以长宽也跟着长了）。位置在东南角沙发旁边（老板休息区）。**颜色由 room.json 里那条 prop 的 `tint` 提亮**（`gain 1.3`，作者「灰度调小、更白一点」）—— ⚠ 真模型挂上来之后 `color` 那个灰蓝色会被 `grey_mesh.visible = false` 盖掉，改色只能走 `tint`。<div class="tripo">Tripo: low poly office water cooler dispenser, blue bottle, rounded, toy style, chibi diorama asset</div></td></tr>
+<tr id="SM_F_Whiteboard"><td class="num">F-12</td><td class="slot">SM_F_Whiteboard</td><td class="mdl">SM_F_Whiteboard</td><td>白板<br><span class="two">墙面布景</span></td><td class="two">(0.60, 1.30, 5.94)<br>2.4×1.1×0.1 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num">80</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">一个带边框的薄板就行，挂在北墙上。上面的字用贴图或几块色块都可以，不做也成立。</td></tr>
+<tr id="SM_F_Sofa"><td class="num">F-17</td><td class="slot">SM_F_Sofa</td><td class="mdl">SM_F_Sofa</td><td>转角沙发（老板休息区）<br><span class="two">茶水区</span></td><td class="two">(6.39, 0.00, 4.05)<br>3.9×1.27×3.21 m<br><span class="hit">绕 Y 轴转 -90°</span></td><td class="num">1,497,046</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Sofa.glb。**面数预算故意放宽到 24000**（其他家具是 4000~12000）—— 它是屋里最大的一件、又是老板休息区的近景主体，砍到 12000 以下坐垫和靠背的缝线会糊掉，不划算。L 形转角沙发，**3.90×1.27×3.21 米** —— 和三连工位桌（3.86 米）一个量级，是屋里最大的一件。模型原始朝向：**L 的拐角在东北角**（背面朝北 + 朝东）；room.json 里写 rot = -90 把拐角转到东南角，正好卡进东南墙角 —— 换位置时别忘了这个 rot。</td></tr>
+<tr id="SM_F_MoneyTree_01"><td class="num">F-18</td><td class="slot">SM_F_MoneyTree_01</td><td class="mdl">SM_F_MoneyTree_01</td><td>发财树 1（雕塑旁边）<br><span class="two">角落布景</span></td><td class="two">(7.50, 0.00, -4.60)<br>0.7×1.15×0.71 m</td><td class="num">1,499,629</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_MoneyTree_01.glb。约 1.15 米高。原模型是 150 万面，已减到 6300 面。</td></tr>
+<tr id="SM_F_MoneyTree_02"><td class="num">F-19</td><td class="slot">SM_F_MoneyTree_02</td><td class="mdl">SM_F_MoneyTree_02</td><td>发财树 2（门边）<br><span class="two">角落布景</span></td><td class="two">(-7.30, 0.00, -3.60)<br>0.74×1.16×0.72 m</td><td class="num">50,002</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_MoneyTree_02.glb。和 1 号是两棵不同的树，不共用模型。</td></tr>
+<tr id="SM_F_Mannequin_01"><td class="num">F-20</td><td class="slot">SM_F_Mannequin_01</td><td class="mdl">SM_F_Mannequin_01</td><td>人台 1（靠窗空地）<br><span class="two">设计部陈列角</span></td><td class="two">(0.00, 0.00, -3.40)<br>0.85×1.95×0.51 m<br><span class="hit">绕 Y 轴转 148°</span></td><td class="num">1,499,752</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Mannequin_01.glb。**2026-10-05 第二批换新** —— 作者说旧的三个人台「太老土」，全换成新的服装展架（穿衣服的人台立架）。这一件是**黑色长外套 + 暗红内衬**。**1.95 米高 = 小人的 1.5 倍**（尺寸绕了两圈：1.25 → 2.60「两个小人高」→ 作者第二天说「这也太高了，人的 1.5 倍就可以」→ 1.30 × 1.5 = 1.95）。**朝向已由 model_prep 转正到 -Z**，room.json 里只写 rot 就行。**4 个展架不排成一行，散布在靠北窗那块空地上。**</td></tr>
+<tr id="SM_F_Mannequin_02"><td class="num">F-21</td><td class="slot">SM_F_Mannequin_02</td><td class="mdl">SM_F_Mannequin_02</td><td>人台 2（靠窗空地）<br><span class="two">设计部陈列角</span></td><td class="two">(1.20, 0.00, -3.95)<br>0.92×1.95×0.57 m<br><span class="hit">绕 Y 轴转 205°</span></td><td class="num">50,004</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Mannequin_02.glb。灰绿／银灰的**斜襟包裹长裙**，腰上系带。**1.95 米高**（小人的 1.5 倍）。朝向 -Z。</td></tr>
+<tr id="SM_F_Mannequin_03"><td class="num">F-22</td><td class="slot">SM_F_Mannequin_03</td><td class="mdl">SM_F_Mannequin_03</td><td>人台 3（靠窗空地）<br><span class="two">设计部陈列角</span></td><td class="two">(2.50, 0.00, -4.65)<br>0.85×1.95×0.42 m<br><span class="hit">绕 Y 轴转 172°</span></td><td class="num">1,499,328</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Mannequin_03.glb。**黑色铆钉皮夹克 + 不对称短裙**，长飘带拖到脚边。**1.95 米高**（小人的 1.5 倍）。朝向 -Z。</td></tr>
+<tr id="SM_F_Mannequin_04"><td class="num">F-23</td><td class="slot">SM_F_Mannequin_04</td><td class="mdl">SM_F_Mannequin_04</td><td>人台 4（靠窗空地）<br><span class="two">设计部陈列角</span></td><td class="two">(3.35, 0.00, -3.50)<br>0.73×1.95×0.35 m<br><span class="hit">绕 Y 轴转 236°</span></td><td class="num">499,054</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Mannequin_04.glb。紫黑**哥特礼服**，背面是交叉系带。**1.95 米高**（小人的 1.5 倍）。朝向 -Z。**这一件是新增的第 4 个人台** —— 作者给了 4 件衣服，索性摆满 4 个。**2026-10-06：4 个不再排成一行，散在那块空地上、朝向各不相同，整体往南挪了约 1 米（不贴北墙）。**</td></tr>
+<tr id="SM_F_Sculpture"><td class="num">F-24</td><td class="slot">SM_F_Sculpture</td><td class="mdl">SM_F_Sculpture</td><td>雕塑装饰（陈列角东端）<br><span class="two">设计部陈列角</span></td><td class="two">(6.15, 0.00, -4.40)<br>0.75×3.25×0.7 m<br><span class="hit">绕 Y 轴转 102°</span></td><td class="num">1,500,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Sculpture.glb。一座**黑色女性立像**（收腰长裙、双手垂在身侧、头微低）。**尺寸 3.25 米 = 2.5 个小人高**（作者 2026-10-05 定的 1.30 × 2.5，2026-10-06 只改了人台、没动它）。**位置搬过两次**：先在陈列角最东端 → 再搬到东北墙角 → 最后按作者要求「删掉褐色前台桌，雕塑移到那里」，现在立在原 `Reception` 的位置 `[6.15, 0, -4.40]`（靠窗那角、发财树 1 旁边）。**model_prep 已把模型朝向转正到 -Z**，room.json 里再写 `rot 102` —— 作者要求「不要面朝沙发，转向朝向门口」，门在西墙 `[-7.88, 0, -1.5]`，从雕塑 (6.15, -4.40) 看过去是西偏南 12°，`rot 102` 正是这个方向。</td></tr>
+<tr id="SM_F_Carpet"><td class="num">F-25</td><td class="slot">SM_F_Carpet</td><td class="mdl">SM_F_Carpet</td><td>沙发底下的圆形地毯<br><span class="two">茶水区</span></td><td class="two">(5.60, 0.00, 3.60)<br>4.8×0.19×4.8 m</td><td class="num">50,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Carpet.glb。作者 2026-10-06 给的圆形地毯（红边 + 白环 + 橙锯齿 + 蓝绒毛心），原模型是直径 1.190 米的正圆、厚 0.084 米，等比放大到 **4.8 米**。**2026-10-06 晚些作者说「地毯有点太厚了，稍微把它调薄一点」→ 加 `squash 0.55`（只压高度）→ 厚 0.339 → 0.187 米**（此处**不能用 target 改**：target 是等比缩放，一改直径也跟着变，而 4.8 米那个直径是专门按沙发定过的）。作者原话「应该在沙发底下……使其应该比沙发大」—— 沙发世界包围盒 3.211(x) × 3.9(z)，4.8 米比它最长边还大 0.9 米。⚠ **它没有碰撞体**（room.json 里 `collide: 0`）：只有 19 厘米厚，加了碰撞盒玩家会被劝在地毯边上绕 —— 这也是 `_add_box` 里「collide 0 = 不要碰撞体」这条约定的由来。⚠ **圆盘盖不住贴墙沙发的整个包围盒**（那得直径 5.05 米、圆心落在墙角上），所以圆心往房间内挪到 (5.60, 3.60)，圆的最东/最南点和东墙、南墙相切，西北半边从沙发底下探出来。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_Bar"><td class="num">F-26</td><td class="slot">SM_F_Bar</td><td class="mdl">SM_F_Bar</td><td>吧台（沙发北边的空地）<br><span class="two">茶水区</span></td><td class="two">(5.40, 0.00, 0.00)<br>4.8×1.27×2.08 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num">1,494,884</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_Bar.glb（作者 2026-10-06 给的新资产，1,494,884 面 —— **不砍面**）。一台**椭圆形自助吧台 / 服务台**：台面 + 一圈柜门（灰/粉 + 金竖条），台面上摆着电水壶、马克杯、滴滤咖啡机、小绿植。**尺寸 4.800 × 1.266 × 2.077 米**（宽×高×深）—— **2026-10-06 稍后**作者说「吧台太小了，放大到长度和地毯直径一样差不多」，于是清单改成 `fit width 4.8` **等比**放大 4.332 倍，长度正好是地毯直径 4.8 米（此前按标准台面高 0.85 米归一得到的是 1.805 × 0.850 × 0.781 米）；那次等比把**高度一起带到了 2.26 米**（= 1.74 个小人高）。⚠ **2026-10-05 再稍后**作者又要求「把我的吧台建模变矮一点，和沙发一样高就行」→ 清单再加 `stretch 0.560177`（**单个数字 = 只乘高**，= 1.266/2.260）→ 高度 **1.266 米 = 沙发实测高度**，长度 4.8 米 / 进深 2.077 米都保住（平面尺寸没变，所以 `pos` 一个数都没动）。⚠ 副作用：台面上的水壶 / 马克杯 / 咖啡机 / 绿植和柜体是**同一个网格**，被一起竖直压扁到 56%（咖啡机 1.43 → 0.80 米高，而且是「压扁」不是「等比变小」）。另一条路是改 `fit height 1.266` 等比缩小 —— 比例不失真，但长度只剩 2.689 米；两版对比见 `shots/_logowork/bar_height_ABC.png`、`bar_props_zoom.png`。⚠ 放大后进深 2.077 米，`room.json` 里 `pos.z` 从 0.30 让到 **0.00**（否则南沿会顶进地毯 0.16 米），东墙边那盆 `Plant_3` 也往南挪了 0.35 米。**朝 -Z 已由 model_prep 转正**（模型的柜门面原本朝 glTF +Z，`yaw 180` 转过来），room.json 里写 `rot 180` → 柜门朝南、正对沙发。⚠ 它是**原会议区**那块地上的唯一一件东西：会议桌和 6 把椅子已被作者删掉（见 `_removed`）。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_MeetingTable"><td class="num">F-27</td><td class="slot">SM_F_MeetingTable</td><td class="mdl">SM_F_MeetingTable</td><td>会议桌（作者标注的预留区）<br><span class="two">会议室</span></td><td class="two">(-2.41, 0.00, 2.41)<br>2.85×1.12×4.8 m</td><td class="num">1,493,934</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_F_MeetingTable.glb（作者 2026-10-05 给的新资产「会议桌(1).glb」，源模型 **493,934 面 / 308,142 顶点 —— 不砍面**）。一张**椭圆长桌 + 8 把椅子**（两侧各 4 把 + 两端各 1 把），台面上铺一条粉色桌旗、摆着几个小立牌/杯垫。⚠ 椅子是**做进同一个网格**的，不能再拆。
+**为什么这个槽位又回来了**：2026-10-06 作者先把整个会议区删了（见 rules._removed 的 F-03~F-09），那块空地放了吧台；现在他做了一张**新的**会议桌，重新画了位置。**这是新桌子、新位置，不是恢复旧槽位** —— 旧的 `SM_F_MeetingTable` 已在 `_removed` 里声明作废，这里用新编号 F-27 重新建。
+**位置怎么来的**：作者在 `shots/布置俯视图.png` 上**手绘了一个黑框 + 框里一个竖长椭圆**，`tools/mark_probe.py` 那套正交投影反算（`cam.size = 17.6`、`px/m = 68.182`）：黑框（预留区）= 世界 x ∈ [−4.65, +0.23] / z ∈ [+0.94, +4.12]；椭圆（桌子）= 中心 **(x −2.41, z +2.41)**、量得 ≈ 0.84 × 1.31 米、**竖长**。所以 `pos` 取椭圆中心 `[−2.41, 0, 2.41]`。
+**朝向与尺寸**：模型长轴原本在 glTF **X**（俯视是横椭圆），作者画的是**竖椭圆** → 归一化写 `yaw 90` 把长轴转到 Godot z；`fit depth 1.6` 等比（系数 1.3562）→ **0.950 × 0.374 × 1.600 米**（宽×高×深）。长轴 1.6 米是照着作者那个椭圆（1.31 米）留了点余量定的 —— 一张 8 人椭圆会议桌，1.6 米在屋里读得出体量又不越预留区。⚠ **高度只有 0.374 米**是模型自带的玩具比例（桌面比椅面只高一截），作者没提高度，没单独拉高（拉高会让椅子跟着抽条）。四视图见 `docs/probe_prep/SM_F_MeetingTable.png`（第 3 格俯视：竖长椭圆 + 中间桌旗线，和作者画的完全对上）。
+**⚠ 2026-10-05 晚些第二版 —— 作者说「这个太小了，我需要它和岛台一样大」**：岛台（`Bar`，F-26）长 **4.8 米**（当初按「长度和地毯直径一样」定的）。于是把清单 `fit depth` 的 target 从 1.6 改成 **4.8**，**等比**放大 3 倍（系数 4.0685）→ **2.850 × 1.123 × 4.800 米**（宽×高×深）。⚠ 等比必然把进深（1.6→4.8）和高（0.374→1.123，恰好和沙发/岛台一档）一起带上；放大后世界 AABB x ∈ [−3.835, −0.985] / z ∈ [0.010, 4.810]，南沿离南墙还有 1.19 米，周围是空地、**零重叠**（比作者画的预留区往南多出 0.69 米，但不打紧）。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_Chair_N1"><td class="num">F-28</td><td class="slot">SM_F_Chair_N1</td><td class="mdl">SM_F_Chair_01<span class="reuse">×2 处复用</span></td><td>工位椅·北排1（随机补的）<br><span class="two">工位椅</span></td><td class="two">(-5.29, 0.00, -4.75)<br>0.59×1.01×0.57 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num">500,004</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**作者原话**：「这里有三把椅子，我需要你把他们按照我在图上画的 **5 个圈**，随机的放在 **6 个地点**，尽量保持每个椅子都在办公桌前，有一个第二列第三个椅子可以比较散漫的远离办公桌。」5 个蓝圈反算出来的世界坐标：①(−5.23,−3.23) ②(−3.95,−5.40) ③(−2.41,−5.41) ④(−3.62,−3.50) ⑤(−1.91,−2.99)。工位岛 6 个座位（3 列 × 南北 2 排，列 x = −5.287 / −4.000 / −2.713），分别落位：①→南排1、②→北排2、③→北排3、④→南排2、⑤→南排3，剩下的**北排1**是随机补的那个。⚠ 北排椅子 z 只能到 −5.20：北墙落地窗占 z∈[−6.00,−5.52]，桌面北沿 z=−4.933，中间只有 0.587 米；作者圈 ②③ 画的 z≈−5.40 已经压进窗户里，往南收到 −5.20。
+**这一把是「随机」补上的那个**（6 个工位里唯一没被圈住的）。摆在 `pos [−5.287, 0, −5.20]`、`rot 0`（面朝南、正对桌子）。**已交付** `assets/models/SM_F_Chair_01.glb`（作者 2026-10-05 给的「椅子1(1).glb」，**500,004 面 —— 不砍面**）。一把**灰绿色**办公转椅（网背 + 头枕 + 扶手 + 五星脚轮）。四视图第 1 格（= glTF +Z 侧）是**座面正脸** → 和工程约定（−Z）相反，归一化写 `yaw 180`。`fit height **1.015**` → 0.591 × 1.015 × 0.572 米。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_Chair_N2"><td class="num">F-29</td><td class="slot">SM_F_Chair_N2</td><td class="mdl">SM_F_Chair_01<span class="reuse">×2 处复用</span></td><td>工位椅·北排2（圈 ②）<br><span class="two">工位椅</span></td><td class="two">(-4.00, 0.00, -4.75)<br>0.59×1.01×0.57 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**复用 SM_F_Chair_01**。摆在 `pos [−4.000, 0, −5.20]`、`rot 0`。作者画的是圈 ② (−3.95, −5.40)，z 往南收到 −5.20（避让北墙落地窗）。<div class="tripo">Tripo: same as SM_F_Chair_01</div></td></tr>
+<tr id="SM_F_Chair_N3"><td class="num">F-30</td><td class="slot">SM_F_Chair_N3</td><td class="mdl">SM_F_Chair_02<span class="reuse">×2 处复用</span></td><td>工位椅·北排3（圈 ③）<br><span class="two">工位椅</span></td><td class="two">(-2.71, 0.00, -4.75)<br>0.57×1.01×0.56 m<br><span class="hit">绕 Y 轴转 180°</span></td><td class="num">500,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** `assets/models/SM_F_Chair_02.glb`（作者 2026-10-05 给的「椅子2(1).glb」，**500,000 面**）。一把**褐色**办公转椅，和 01 同款不同色。同样 +Z 正脸 → `yaw 180`。`fit height 1.015` → 0.575 × 1.015 × 0.558 米。
+摆在 `pos [−2.713, 0, −5.20]`、`rot 0`。作者画的是圈 ③ (−2.41, −5.41)，同样往南收到 −5.20。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_Chair_S1"><td class="num">F-31</td><td class="slot">SM_F_Chair_S1</td><td class="mdl">SM_F_Chair_03<span class="reuse">×2 处复用</span></td><td>工位椅·南排1（圈 ①）<br><span class="two">工位椅</span></td><td class="two">(-5.29, 0.00, -2.85)<br>0.56×1.01×0.59 m</td><td class="num">500,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** `assets/models/SM_F_Chair_03.glb`（作者 2026-10-05 给的「椅子3(1).glb」，**500,000 面**）。一把**黑色**办公转椅，和 01/02 同款不同色。同样 +Z 正脸 → `yaw 180`。`fit height 1.015` → 0.559 × 1.015 × 0.591 米。
+摆在 `pos [−5.287, 0, −3.302]`、`rot 180`（面朝北、正对桌子）。作者画的是圈 ① (−5.23, −3.23)。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_F_Chair_S2"><td class="num">F-32</td><td class="slot">SM_F_Chair_S2</td><td class="mdl">SM_F_Chair_02<span class="reuse">×2 处复用</span></td><td>工位椅·南排2（圈 ④）<br><span class="two">工位椅</span></td><td class="two">(-4.00, 0.00, -2.85)<br>0.57×1.01×0.56 m</td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**复用 SM_F_Chair_02**。摆在 `pos [−4.000, 0, −3.302]`、`rot 180`。作者画的是圈 ④ (−3.62, −3.50)。<div class="tripo">Tripo: same as SM_F_Chair_02</div></td></tr>
+<tr id="SM_F_Chair_S3"><td class="num">F-33</td><td class="slot">SM_F_Chair_S3</td><td class="mdl">SM_F_Chair_03<span class="reuse">×2 处复用</span></td><td>工位椅·南排3（圈 ⑤，散漫那把）<br><span class="two">工位椅</span></td><td class="two">(-1.91, 0.00, -2.54)<br>0.56×1.01×0.59 m<br><span class="hit">绕 Y 轴转 -65°</span></td><td class="num"><span class="grey">同上</span></td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**复用 SM_F_Chair_03**。**这就是作者说的「可以比较散漫的远离办公桌」的那把** —— 圈 ⑤ 是 5 个圈里唯一明显离开桌子边缘的（画在桌岛东南角外面 0.8 米），所以把它**直接放在圈心 `pos [−1.91, 0, −2.99]`**、并且**斜着摆 `rot 205`**（不是正对桌子），做出「人离席随手一推」的样子。它离桌前约 0.31 米空隙。<div class="tripo">Tripo: same as SM_F_Chair_03</div></td></tr>
+<tr class="zone-row"><td colspan="9">J · 可交互道具（6 个位置 / 6 个模型）</td></tr>
+<tr id="SM_J_Bag_FengDesk"><td class="num">J-01</td><td class="slot">SM_J_Bag_FengDesk</td><td class="mdl">SM_J_Bag_FengDesk</td><td>探索点 1 · 凤凰男桌上那只包<br><span class="two">探索点</span></td><td class="two">(-5.64, 0.60, -4.30)<br>0.5×0.24×0.35 m</td><td class="num">800</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">「走线是歪的」是这段文案的题眼，模型上要看得出来。旁边还可以带一部屏幕亮着的手机。<div class="tripo">Tripo: low poly designer handbag, hard leather look, crooked stitching, toy style, chibi diorama prop</div></td></tr>
+<tr id="SM_J_EmptySeatDesk"><td class="num">J-02</td><td class="slot">SM_J_EmptySeatDesk</td><td class="mdl">SM_J_EmptySeatDesk</td><td>探索点 2 · 靠窗空位桌面<br><span class="two">探索点</span></td><td class="two">(-3.60, 0.60, -4.35)<br>0.5×0.06×0.35 m</td><td class="num">300</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">承载三句文案：键盘、显示器、桌角写下工位号的胶带。**键盘和显示器已经做进 SM_F_DeskBench 里了** —— 这个位置只剩「桌角那块磨白的胶带 + 一张便签」，做小做扁（约 0.4×0.05×0.29 米），千万别做成盖满整张桌面的板子。<div class="tripo">Tripo: low poly small worn tape label patch on desk corner plus one sticky note, flattened, toy style prop</div></td></tr>
+<tr id="SM_J_Sketchbook"><td class="num">J-03</td><td class="slot">SM_J_Sketchbook</td><td class="mdl">SM_J_Sketchbook</td><td>探索点 3 · 实习 1 号的素描本<br><span class="two">探索点</span></td><td class="two">(-2.36, 0.60, -4.30)<br>0.48×0.13×0.35 m</td><td class="num">800</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">素描本要摊开、能看见里面的珠宝草图（贴图即可）。另配一双筷子的便当盒。<div class="tripo">Tripo: low poly open sketchbook with jewelry doodles, pencil, bento box with two chopsticks, toy style prop</div></td></tr>
+<tr id="SM_J_HrCabinet"><td class="num">J-04</td><td class="slot">SM_J_HrCabinet</td><td class="mdl">SM_J_HrCabinet</td><td>探索点 4 · 人事资料柜<br><span class="two">探索点</span></td><td class="two">(-7.71, 0.00, 2.00)<br>0.46×1.41×0.91 m</td><td class="num">500,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**已交付** assets/models/SM_J_HrCabinet.glb（作者 2026-10-06 给的「档案柜.glb」，**50 万面 —— 不砍面**，tri 写实测值）。一只**双门柜**：蓝灰 / 粉 / 米黄 / 玫红四块门板 + 两根竖长门把手，金属灰柜体。
+⚠ 尺寸**改过一次**：先是 `fit height 1.36`（= 原灰盒 `[0.6, 1.7, 1.8]` 乘 `prop_scale 0.8` 的有效高，为了「只换外观不动布局」）；**同一天晚上作者说「柜子太小了，至少等比放大 1.3 倍」** → 现在 **`fit height 1.768` = 1.1327 × 1.768 × 0.5715 米**（宽×高×深，三轴同乘 1.3，等比）。柜背仍贴西墙，`pos.x` 跟着挪到 **−7.7143**。
+⛔ **转角写在探索点的 `rot` 上（objects.json 的 −90），不要写这里**：模型自然姿态的正面是 −Z（`yaw 180` 已把双开门正面从 glTF +Z 翻过来），要靠宿主转 −90° 才朝屋里（+X）—— 和公示板同一套。两处都写会叠加成 180°、柜门背对观众。槽位这里只声明「模型自然姿态」——宽沿 x、厚沿 z、正面 −Z。
+⚠ 改尺寸只能改 `tools/model_prep_list.json` 重出 glb —— 改 objects.json 的 `size`/`scale` 不会缩放模型，只会让 `_check_size` 报警。<div class="tripo">Tripo: 已交付</div></td></tr>
+<tr id="SM_J_PantryTable"><td class="num">J-05</td><td class="slot">SM_J_PantryTable</td><td class="mdl">SM_J_PantryTable</td><td>探索点 5 · 吧台<br><span class="two">探索点</span></td><td class="two">(5.30, 1.28, 0.36)<br>0.64×0.27×0.42 m</td><td class="num">60,000</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">**2026-10-05 晚些：从「茶水间台面」改成「吧台台面」。**
+作者做了吧台（`SM_F_Bar`），原茶水间灰盒台面（西南角 `[-6.6,0,4.4]`）**删掉**，这个探索点整套搬到吧台上 → `objects.json` 的 pantry 已改名「**吧台**」、`pos [5.40, 1.30, 0.35]`（**吧台正中台面**，台面高 1.266）。
+**这份模型以后要做什么**：台面上的小杂物组合 —— 两个橘子、压在杯子底下的年会奖券、一摞缴费单。摆放位置永远跟 `objects.json` 的 spot 走，本表不重复写坐标。
+⚠ 吧台本体是 `SM_F_Bar`（F-26），**别搞混**：这个槽位只做**台面上那几件小道具**。<div class="tripo">Tripo: small tray of items on a bar counter, two oranges, a crumpled lottery ticket and a stack of bills, toy style</div></td></tr>
+<tr id="SM_J_BulletinBoard"><td class="num">J-06</td><td class="slot">SM_J_BulletinBoard</td><td class="mdl">SM_J_BulletinBoard</td><td>探索点 6 · 公告栏<br><span class="two">探索点</span></td><td class="two">(-7.94, 1.35, 4.40)<br>0.1×0.88×1.31 m</td><td class="num">499,048</td><td class="center"><span class="badge p2">接着做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">考勤表 + 一张通知，两张纸就行，字用贴图。挂西墙南段。**2026-10-05 晚些已交付真模型**（作者给的「公示板.glb」，499,048 面，作者不让砍面所以 tri 改成实测值）：软木板 + 四块通知 + 顶上「公司通告公示」标题，`yaw 180`（有内容那面朝 −Z），`fit height 1.1` → 1.637 × 1.1 × 0.123 米。⛔ **转角写在探索点的 `rot` 上（objects.json），不要写这里**：两处都写会叠加成 180°、板子背对观众。槽位这里只声明「模型自然姿态」——宽沿 x、厚沿 z、正面 −Z。<div class="tripo">Tripo: low poly cork bulletin board with two pinned papers, slightly curled corner, toy style</div></td></tr>
+<tr class="zone-row"><td colspan="9">A · 角色（4 个位置 / 4 个模型）</td></tr>
+<tr id="SM_A_Npc_Feng"><td class="num">A-01</td><td class="slot">SM_A_Npc_Feng</td><td class="mdl">SM_A_Npc_Feng</td><td>凤凰男<br><span class="two">角色</span></td><td class="two">(-5.29, 0.00, -1.45)<br>0.5×1.04×0.46 m</td><td class="num">10,534</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**2026-10-05 放大**：1.04 → **1.30 米高**（作者反馈「小人建模有点小」）。4 个角色统一，objects.json 里写 scale: 1.0。 人森比例：约 3.5 头身。表里的尺寸是**缩放后**的真值（原始 1.3 米 × prop_scale 0.8 ≈ 1.04 米）—— 照表做就行。第一幕只要一个站姿，不要走路动画。站在自己工位前面。<div class="tripo">Tripo: low poly chibi male office worker, standing idle, sage blue shirt, rounded body, Animal Crossing style character, A-pose</div></td></tr>
+<tr id="SM_A_Npc_Intern1"><td class="num">A-02</td><td class="slot">SM_A_Npc_Intern1</td><td class="mdl">SM_A_Npc_Intern1</td><td>实习 1 号<br><span class="two">角色</span></td><td class="two">(-2.71, 0.00, -1.45)<br>0.5×1.04×0.46 m</td><td class="num">946,598</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**2026-10-05 放大**：1.04 → **1.30 米高**（作者反馈「小人建模有点小」）。4 个角色统一，objects.json 里写 scale: 1.0。 同上。她手里压着一本素描本（和 J-03 呼应）。**已交付** assets/models/SM_A_Npc_Intern1.glb（1.04 米高的大头娃娃）。原模型 94.7 万面，已减到 4000 面。<div class="tripo">Tripo: low poly chibi female intern, standing holding a sketchbook, sage green outfit, rounded body, Animal Crossing style character</div></td></tr>
+<tr id="SM_A_Npc_Boss"><td class="num">A-03</td><td class="slot">SM_A_Npc_Boss</td><td class="mdl">SM_A_Npc_Boss</td><td>老板<br><span class="two">角色</span></td><td class="two">(6.05, 0.00, 3.60)<br>0.5×1.04×0.46 m</td><td class="num">10,034</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**2026-10-05 放大**：1.04 → **1.30 米高**（作者反馈「小人建模有点小」）。4 个角色统一，objects.json 里写 scale: 1.0。 **已交付** assets/models/SM_A_Npc_Boss.glb —— 浅色西装、戴眼镜的大头娃娃，约 1.04 米高。设定上他不在工位办公，在东南角沙发那边休息，所以站位写在沙发旁边。</td></tr>
+<tr id="SM_A_Npc_Director"><td class="num">A-04</td><td class="slot">SM_A_Npc_Director</td><td class="mdl">SM_A_Npc_Director</td><td>外聘设计总监<br><span class="two">角色</span></td><td class="two">(-1.35, 0.00, -3.70)<br>0.5×1.04×0.46 m</td><td class="num">12,319</td><td class="center"><span class="badge p1">必做</span></td><td class="center"><span class="hit">已有 glb</span></td><td class="two">**2026-10-05 放大**：1.04 → **1.30 米高**（作者反馈「小人建模有点小」）。4 个角色统一，objects.json 里写 scale: 1.0。 **已交付** assets/models/SM_A_Npc_Director.glb —— 黑色长发、黑色长外套的大头娃娃，约 1.04 米高。站位在人台旁边，像是在看那几个模特。</td></tr>
+<tr class="zone-row"><td colspan="9">FX · 特效辅助（1 个位置 / 1 个模型）</td></tr>
+<tr id="SM_FX_Marker"><td class="num">X-01</td><td class="slot">SM_FX_Marker</td><td class="mdl">SM_FX_Marker</td><td>点击落点圈<br><span class="two">辅助</span></td><td class="two"><span class="grey">跟随点击点</span><br>0.6×0.02×0.6 m</td><td class="num">40</td><td class="center"><span class="badge p3">可跳过</span></td><td class="center"><span class="grey">灰盒</span></td><td class="two">可以不做。第一人称下低头才看得见，一个半透明圆环或一小片贴花都行。</td></tr>
+</tbody></table>
+<footer>灰盒工程：<code>.</code>（已在 Godot 工程列表里，打开 Godot 点进去即可）　｜　自检：<code>res://scenes/selftest.tscn</code></footer>
+</div></body></html>

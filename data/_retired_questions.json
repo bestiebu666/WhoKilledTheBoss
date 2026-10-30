@@ -1,0 +1,44 @@
+{
+  "_note": "第一幕的 3 道判断题。npc = 找谁问；requires = 需要先答完哪些题；any = 谁都可以问。答对走 on_correct（解锁新剧情），答错走 on_wrong（出现新线索）。第一幕不做世界变色。",
+
+  "questions": [
+    {
+      "id": "q_feng_rich",
+      "npc": "feng",
+      "target": "feng_desk",
+      "prompt": "凤凰男说他家里是做珠宝生意的。真的吗？",
+      "options": [
+        { "text": "是真的", "correct": false },
+        { "text": "是假的", "correct": true }
+      ],
+      "on_correct": "你点了那只包一下。\n他讪讪地把它塞回抽屉 —— 那一角赔率小票没来得及收进去。\n【新剧情】他再开口吹牛之前，会先朝你的方向看一眼。",
+      "on_wrong": "你没接话。他更来劲了，把包往你面前推了推。\n【新线索】包是真的，账单也真的是逾期的。两件事同时成立，反而更说不通。"
+    },
+    {
+      "id": "q_intern1_entry",
+      "npc": "intern1",
+      "target": "intern1_desk",
+      "requires": [],
+      "prompt": "实习 1 号能坐进设计部，是因为专业能力吗？",
+      "options": [
+        { "text": "是，她画得最好", "correct": false },
+        { "text": "不是，另有原因", "correct": true }
+      ],
+      "on_correct": "你把录用名单翻给她看。\n她没否认，只说了一句：「被划掉的那个，其实比我合适。」\n【新剧情】每周三下午，保洁阿姨会来拖设计部的地。",
+      "on_wrong": "她低头继续画，画得很稳。\n【新线索】她桌上那份便当，多带了一双筷子，而且没拆封。"
+    },
+    {
+      "id": "q_empty_seats",
+      "npc": "any",
+      "target": "empty_seat",
+      "requires": ["q_feng_rich", "q_intern1_entry"],
+      "prompt": "靠窗那两个位置，为什么一直空着？",
+      "options": [
+        { "text": "就是没人愿意坐", "correct": false },
+        { "text": "位置其实有人", "correct": true }
+      ],
+      "on_correct": "你翻了考勤表。\n那两个工位号在打卡记录里一天都没断过。\n【新剧情】空着的只是椅子。至于人什么时候来、来的是不是人，第一幕不回答。",
+      "on_wrong": "保洁阿姨路过，说了一句：「那两个位置有人。」\n你回头看，桌面干干净净。\n【新线索】空着的桌面，比在用的还干净。"
+    }
+  ]
+}

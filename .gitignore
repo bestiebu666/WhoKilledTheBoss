@@ -1,0 +1,47 @@
+# Godot 编辑器、导入与导出缓存（可由源文件重新生成）
+.godot/
+
+# 导出的游戏、安装包与签名材料
+build/
+*.apk
+*.aab
+*.exe
+*.pck
+*.idsig
+*.keystore
+*.jks
+
+# 本机导出预设包含签名密码和本机路径；仅提交脱敏示例
+export_presets.cfg
+
+# 调试截图与模型探针输出
+shots/
+docs/probe*/
+docs/_*.png
+
+# 已退休的模型及临时工作素材
+assets/models/_retired/
+tools/_tex/
+tools/_ui_src/_bak/
+
+# 手工备份、临时文件和本地日志
+*.bak*
+*.tmp
+*.temp
+*.log
+*~
+
+# Python 工具缓存
+__pycache__/
+*.py[cod]
+
+# 操作系统与编辑器文件
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 本地环境文件（如以后添加，绝不提交）
+.env
+.env.*
+!.env.example

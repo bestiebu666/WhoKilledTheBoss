@@ -1,0 +1,78 @@
+{
+  "_note": "进入页 + 选幕页的全部内容。改文案只改这个文件，代码不用动。acts 里 locked=true 的幕点不动（只给一句提示）；scene 是那一幕要加载的场景，空字符串=还没做。locked_hint 里的 %s 会被替换成幕名。place / desc 留空 = 卡面只显示幕名那一行（锁定的补一行「已锁定」）—— 作者 2026-10-06 把第二、三幕的占位地名（世界变色 / 还没定）和说明（还没做）清掉了，等定下来再填。",
+
+  "title": {
+    "_note": "开始页。**填了下面的 pop 就走「整屏底图 + 素材绝对定位」**（作者 2026-10-06 的波普风方案）；把 pop 删掉就退回这套居中流式布局：去掉卡片边框、只留 logo，下面两个选项是作者手绘的图示。logo_w / btn_w 只给宽度，高度按图片长宽比自动算。footer 只在后备布局里生效。",
+    "logo": "res://assets/textures/ui/title_logo.png",
+    "logo_w": 680,
+    "btn_start": "res://assets/textures/ui/btn_start.png",
+    "btn_recap": "res://assets/textures/ui/btn_recap.png",
+    "btn_w": 300,
+    "logo_gap": 62,
+    "btn_gap": 14,
+    "lift": 30,
+    "name": "谁杀死了老板",
+    "bg": "",
+    "footer": "按住鼠标拖动看四周　·　点地面走过去",
+
+    "pop": {
+      "_note": "波普风开始页（作者给底图 + logo + 两张手绘按钮图，并画了摆位示意图）。bg = 整屏底图：作者原图 1801×1280，按 16:9 **只切边**（上切 30px、下切 237px）→ 1801×1013，画面里一个像素都没改。layers 逐层绝对定位：x/y = 左上角（单位 = 设计稿像素，可为负 = 出画），s = 相对素材**原图**尺寸的等比缩放。design_w/h 是设计稿尺寸，运行时按视口**等比**换算并居中，窗口比例变了也不会把素材拉变形。⚠️ 带 action 的层是按钮（start / recap），不带 action 的当图片贴（名字固定叫 Logo，自检认这个名）。改摆位只改这个块，不用碰代码。",
+      "bg": "res://assets/textures/ui/title_bg_pop.png",
+      "design_w": 1801,
+      "design_h": 1013,
+      "layers": [
+        {"tex": "res://assets/textures/ui/title_logo_pop.png", "x": -113, "y": -138, "s": 1.12},
+        {"tex": "res://assets/textures/ui/btn_start_pop.png", "x": 542, "y": 574, "s": 0.55, "action": "start", "label": "开始游戏"},
+        {"tex": "res://assets/textures/ui/btn_recap_pop.png", "x": 562, "y": 825, "s": 0.37, "action": "recap", "label": "前情提要"}
+      ]
+    }
+  },
+  "start_label": "开始游戏",
+  "recap_label": "前情提要",
+  "recap_source": "res://data/intro.json",
+
+  "acts_title": "选择第几幕",
+  "acts_hint": "第一幕可以进了，后面两幕敬请期待。",
+  "locked_hint": "%s 敬请期待 —— 先把第一幕走完。",
+  "back_label": "返回标题",
+
+  "acts_pop": {
+    "_note": "选幕页的波普风版面（作者 2026-10-05 给的第二页平面美术）。bg = 整屏底图：作者原图 1920×1079，按 16:9 缩到 1920×1080（左右各切 1px），画面内容没动。**三个幕位 = 美术上已经画好的三个面板**（设计A组 / 秘书处 / 老板办公室），所以这里不再画卡片底 —— 只在这三块上面盖**透明按钮**（占住点击区）+ 文字。rect 用「底图设计稿像素」写左/上/右/下，比 x/y/w/h 直观（照美术量的）。design_w/h = 底图尺寸，运行时按视口等比换算并居中。",
+    "bg": "res://assets/textures/ui/acts_bg_pop.png",
+    "design_w": 1920,
+    "design_h": 1080,
+    "cards": [
+      {"rect": [364, 328, 688, 561], "action": "act", "label": "第一幕"},
+      {"rect": [772, 328, 1014, 561], "action": "act", "label": "第二幕"},
+      {"rect": [1145, 328, 1386, 561], "action": "act", "label": "第三幕"}
+    ],
+    "back": {"rect": [900, 743, 1034, 856], "action": "back", "label": "返回标题"}
+  },
+
+  "acts": [
+    {
+      "no": 1,
+      "name": "第一幕",
+      "place": "设计部",
+      "desc": "6 个探索点 · 3 道判断题",
+      "locked": false,
+      "scene": "res://scenes/main.tscn"
+    },
+    {
+      "no": 2,
+      "name": "第二幕",
+      "place": "",
+      "desc": "",
+      "locked": true,
+      "scene": ""
+    },
+    {
+      "no": 3,
+      "name": "第三幕",
+      "place": "",
+      "desc": "",
+      "locked": true,
+      "scene": ""
+    }
+  ]
+}

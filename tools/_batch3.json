@@ -1,0 +1,11 @@
+{
+  "_note": "临时：2026-10-05 第三次反馈 —— 人台从 2.60 米（两个小人高）改回 1.95 米（1.5 个小人高），作者说「刚刚点开发现这也太高了」。只重跑 4 个人台；雕塑尺寸没变（仍是 3.25 米），不用重跑。",
+  "models_dir": "assets/models",
+  "probe_dir": "docs/probe_prep",
+  "items": [
+    { "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/衣服1.glb", "name": "SM_F_Mannequin_01", "fit": "height", "target": 1.95, "tex": 2048, "yaw": 180, "weld": false },
+    { "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/衣服2.glb", "name": "SM_F_Mannequin_02", "fit": "height", "target": 1.95, "tex": 2048, "yaw": 180, "weld": false },
+    { "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/衣服3.glb", "name": "SM_F_Mannequin_03", "fit": "height", "target": 1.95, "tex": 2048, "yaw": 180, "weld": false },
+    { "src": "D:/xwechat_files/wxid_6z2g8f1replf22_4b59/msg/file/2026-10/衣服4.glb", "name": "SM_F_Mannequin_04", "fit": "height", "target": 1.95, "tex": 2048, "yaw": 180, "weld": false }
+  ]
+}

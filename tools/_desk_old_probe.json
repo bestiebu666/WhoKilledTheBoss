@@ -1,0 +1,16 @@
+{
+  "_note": "临时探针：给已退役的旧办公桌补一份四视图，只出图不写 assets。旧 glb 已经是归一化过的（底面中心、朝 -Z、3.862×0.970×0.665），所以 yaw 0、fit width 3.862 保持原样。",
+  "models_dir": "shots/_logowork/desk_ab",
+  "probe_dir": "shots/_logowork/desk_ab",
+  "items": [
+    {
+      "src": "./assets/models/_retired/SM_F_Desk3P_old_20261005.glb",
+      "name": "Desk_OLD_sheet",
+      "fit": "width",
+      "target": 3.862,
+      "tex": 1024,
+      "yaw": 0,
+      "probe_only": true
+    }
+  ]
+}
